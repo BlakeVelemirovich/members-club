@@ -1,5 +1,16 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Sign In 
+  
+  form(action='/log-in', method='POST')
+    label(for="username") Username
+    input(name='username', placeholder='username', type='text')
+    label(for='password') Password 
+    input(name='password', type='password')
+    button Log in
+  
+  hr
+  h1 Or sign up instead!
+  
+  a(href='/sign-up') Sign Up
