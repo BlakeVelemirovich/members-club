@@ -3,6 +3,44 @@ const { body, validationResult } = require('express-validator');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
+const LocalStrategy = require("passport-local").Strategy;
+
+passport.use(
+    new LocalStrategy(async(username, password, done) => {
+      try {
+        const user = await User.findOne({ username: username });
+        if (!user) {
+          return done(null, false, { message: "Incorrect username" });
+        };
+        bcrypt.compare(password, user.password, (err, res) => {
+          if (res) {
+            // passwords match! log user in
+            return done(null, user)
+          } else {
+            // passwords do not match!
+            return done(null, false, { message: "Incorrect password" })
+          }
+        })
+        
+        return done(null, user);
+      } catch(err) {
+        return done(err);
+      };
+    })
+  );
+  
+  passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  });
+  
+  passport.deserializeUser(async function(id, done) {
+    try {
+      const user = await User.findById(id);
+      done(null, user);
+    } catch(err) {
+      done(err);
+    };
+  });
 
 exports.sign_up_get = (req, res, next) => {
     res.render('sign_up');
@@ -14,6 +52,10 @@ exports.sign_up_post = [
     .trim()
     .notEmpty().withMessage('Username is required')
     .isAscii().withMessage('Must use letters or numbers or special characters')
+    .customSanitizer((value) => {
+        // forcing all letters to lowercase so unique usernames aren't case sensitive
+        return value.toLowerCase();
+    })
     .escape(),
 
     body('password')
@@ -72,23 +114,11 @@ exports.sign_up_post = [
 ];
 
 
-/* exports.log_in = [
-    body('username')
-    .notEmpty().withMessage()
-    .isAlphanumeric.withMessage()
-    .trim(),
+exports.log_in = [
+    passport.authenticate('local', { failureRedirect: '/bs' }),
 
-    body('password')
-    .notEmpty().withMessage()
-    .isAlphanumeric.withMessage()
-    .trim(),
-
-    asyncHandler(async (req, res, next) => {
-        // Extract the validation errors from a request.
-        const errors = validationResult(req);
-        
-
-        
-      })
-]; */
+    function (req, res, next) { 
+      res.render('index', { user: req.user}); 
+    }
+]
 
