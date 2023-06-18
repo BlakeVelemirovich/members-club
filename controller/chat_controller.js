@@ -3,6 +3,7 @@ const { body, validationResult } = require('express-validator');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
+const Post = require('../models/post');
 const LocalStrategy = require("passport-local").Strategy;
 
 passport.use(
@@ -28,7 +29,7 @@ passport.use(
       };
     })
   );
-  
+
   passport.serializeUser(function(user, done) {
     done(null, user.id);
   });
@@ -113,12 +114,48 @@ exports.sign_up_post = [
         })
 ];
 
-
 exports.log_in = [
     passport.authenticate('local', { failureRedirect: '/bs' }),
 
     function (req, res, next) { 
-      res.render('index', { user: req.user}); 
+      res.render('index', { 
+        user: req.user,
+        title: 'Chat Board'
+      }); 
     }
 ]
+
+exports.post = [
+    body('message')
+    .trim()
+    .notEmpty().withMessage('Must contain a message')
+    .escape(),
+  
+    asyncHandler(async (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          console.log(errors);
+        }
+
+        try {
+          const post = new Post({
+            message: req.body.message,
+            postedAt: new Date(),
+            user: req.user._id
+          })
+
+          await post.save();
+          const allPosts = await Post.find();
+          
+          res.render('index', {
+            user: req.user,
+            title: 'Chat Board',
+            posts: allPosts
+          })
+        } catch (err) {
+          return next(err);
+        }
+    })
+
+];
 
