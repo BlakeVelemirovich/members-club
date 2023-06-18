@@ -1,0 +1,2 @@
+Simple Express Node.js back-end message board website where users can log in and make posts to be displayed in a chatboard.
+Posts are saved into MongoDb, and processed with Mongoose. Log in authentication is handled through passport and bcryptJS to hash & salt passwords in order to keep them secret and private. Log in session is handled by express-session. This small project follows a Router/Controller/Model structure.
