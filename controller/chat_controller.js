@@ -116,7 +116,6 @@ exports.sign_up_post = [
 
 exports.log_in = [
     passport.authenticate('local', { failureRedirect: '/bs' }),
-
     function (req, res, next) { 
       res.render('index', { 
         user: req.user,

@@ -1,12 +1,16 @@
 var express = require('express');
 var router = express.Router();
 const chat_controller = require('../controller/chat_controller');
+const Post = require('../models/post');
 
 // GET home page
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
+  const allPosts = await Post.find();
+
   res.render('index', { 
-    user: req.username,
-    title: 'Sign in'
+    user: req.user,
+    title: 'Sign in',
+    posts: allPosts
   });
 });
 

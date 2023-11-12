@@ -6,14 +6,15 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require("express-session");
 const passport = require("passport");
-const bcrypt = require('bcryptjs');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
 
-app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+// passport setup
+const passportKey = process.env.PASSPORTKEY
+app.use(session({ secret: passportKey, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
