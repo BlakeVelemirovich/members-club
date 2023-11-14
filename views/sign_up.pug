@@ -6,11 +6,11 @@ block content
 
   form(action='/sign-up', method='POST')
     label(for="username") Username
-    input(name='username', placeholder=(undefined===username ? 'username' : username), type='text')
+    input(name='username', placeholder=(undefined===username ? 'Username' : username), type='text' required)
     label(for='password') Password 
-    input(name='password', type='password')
+    input(name='password', type='password' placeholder="Password" required)
     label(for='firstname') First Name 
-    input(name='firstname', type='text', placeholder=(firstname===undefined ? "First name" : firstname))
+    input(name='firstname', type='text', placeholder=(firstname===undefined ? "First name" : firstname) required)
     label(for='lastname') Last Name 
     input(name='lastname', type='text', placeholder=(undefined===lastname ? "Last name" : lastname))
     label(for='membership') Membership Status

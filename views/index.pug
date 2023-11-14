@@ -20,17 +20,17 @@ block content
         form(action='/post', method='POST')
           label(for='message') Make a new post!
           div 
-            input(name='message', placeholder='Say something', type='text')
+            input(name='message' placeholder='Say something' type='text' required)
             button Submit
 
   
   else
     h1 #{title}
-    form(action='/log-in', method='POST')
+    form(action='/log-in' method='POST')
       label(for="username") Username
-      input(name='username', placeholder='username', type='text')
+      input(name='username' placeholder='Username' type='text' required)
       label(for='password') Password 
-      input(name='password', type='password')
+      input(name='password', type='password' placeholder="Password" required)
       button Log in
   
     hr
