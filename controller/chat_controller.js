@@ -51,8 +51,8 @@ exports.sign_up_post = [
     // sanitization and validation
     body('username')
     .trim()
-    .notEmpty().withMessage('Username is required')
-    .isAscii().withMessage('Username must use letters or numbers or special characters')
+    .notEmpty().withMessage('* Username is required')
+    .isAscii().withMessage('* Username must use letters or numbers or special characters')
     .customSanitizer((value) => {
         // forcing all letters to lowercase so unique usernames aren't case sensitive
         return value.toLowerCase();
@@ -61,27 +61,27 @@ exports.sign_up_post = [
 
     body('password')
     .trim()
-    .notEmpty().withMessage('Password is required')
-    .isAscii().withMessage('Password must only contain letters or numbers or special characters')
+    .notEmpty().withMessage('* Password is required')
+    .isAscii().withMessage('* Password must only contain letters or numbers or special characters')
     .escape(),
 
     body('firstname')
     .trim()
-    .notEmpty().withMessage('First name is required')
-    .isAlpha().withMessage('First name must be only letters')
+    .notEmpty().withMessage('* First name is required')
+    .isAlpha().withMessage('* First name must be only letters')
     .escape(),
 
     body('lastname')
     .trim()
-    .notEmpty().withMessage('Last name is required')
-    .isAlpha().withMessage('Last name must be only letters')
+    .notEmpty().withMessage('* Last name is required')
+    .isAlpha().withMessage('* Last name must be only letters')
     .escape(),
 
     body('membership')
-    .notEmpty().withMessage('Membership status is required'),
+    .notEmpty().withMessage('* Membership status is required'),
 
     body('admin')
-    .notEmpty().withMessage('Admin status is required'),
+    .notEmpty().withMessage('* Admin status is required'),
 
     asyncHandler(async (req, res, next) => {
         // Extract the validation errors from a request.

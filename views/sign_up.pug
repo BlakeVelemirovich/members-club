@@ -4,15 +4,20 @@ block content
 
   h1 Sign Up 
 
+  if errors
+      ul
+        for error in errors
+          li(class="error")!= error.msg
+
   form(action='/sign-up', method='POST')
     label(for="username") Username
-    input(name='username', placeholder=(undefined===username ? 'Username' : username), type='text' required)
+    input(name='username', value=(undefined===username ? "" : username), type='text', placeholder="Username", required)
     label(for='password') Password 
-    input(name='password', type='password' placeholder="Password" required)
+    input(name='password', type='password' value="Password" required)
     label(for='firstname') First Name 
-    input(name='firstname', type='text', placeholder=(firstname===undefined ? "First name" : firstname) required)
+    input(name='firstname', type='text', value=(firstname===undefined ? "" : firstname), placeholder="First Name", required)
     label(for='lastname') Last Name 
-    input(name='lastname', type='text', placeholder=(undefined===lastname ? "Last name" : lastname))
+    input(name='lastname', type='text', value=(undefined===lastname ? "" : lastname), placeholder="Last Name", required)
     label(for='membership') Membership Status
     select(name='membership')
       option(value='yes') Yes 
@@ -22,8 +27,3 @@ block content
       option(value='yes') Yes 
       option(value='no') no
     button Sign Up
-
-    if errors
-      ul
-        for error in errors
-          li!= error.msg

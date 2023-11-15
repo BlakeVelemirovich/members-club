@@ -1,8 +1,14 @@
+:root {
+  --accent-colour: #ebcfb2;
+}
+
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 20px;
   background-color: #f2f2f2; 
   height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(to right, #b38d97, #d5aca9);
 }
 
 /* ********** Header ********** */
@@ -94,5 +100,95 @@ article#new-message form div {
 }
 
 .error {
-  border: 1px solid red;
+  color: red;
+}
+
+/* Log-in Styles */
+::selection {
+  background: var(--accent-colour);
+}
+#form-container {
+  max-width: 440px;
+  padding: 0 20px;
+  margin: 170px auto;
+}
+article#form-wrapper {
+  width: 100%;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
+}
+article#form-wrapper .title {
+  height: 90px;
+  background: var(--accent-colour);
+  border-radius: 5px 5px 0 0;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+article#form-wrapper form {
+  padding: 30px 25px 25px 25px;
+}
+article#form-wrapper form .row {
+  height: 45px;
+  margin-bottom: 15px;
+  position: relative;
+}
+article#form-wrapper form .row input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding-left: 60px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+form .row input:focus {
+  border-color: var(--accent-colour);
+  box-shadow: inset 0px 0px 2px 2px var(--accent-colour);
+}
+form .row input::placeholder {
+  color: gray;
+}
+article#form-wrapper form .row i {
+  position: absolute;
+  width: 47px;
+  height: 100%;
+  color: #fff;
+  font-size: 18px;
+  background: var(--accent-colour);
+  border: 1px solid var(--accent-colour);
+  border-radius: 5px 0 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+article#form-wrapper form .button input {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  padding-left: 0px;
+  background: var(--accent-colour);
+  border: 1px solid var(--accent-colour);
+  cursor: pointer;
+}
+form .button input:hover {
+  background: var(--accent-colour);
+}
+article#form-wrapper form .signup-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 17px;
+}
+article#form-wrapper form .signup-link a {
+  color: var(--accent-colour);
+  text-decoration: none;
+}
+form .signup-link a:hover {
+  text-decoration: underline;
 }

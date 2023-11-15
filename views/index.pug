@@ -25,17 +25,23 @@ block content
 
   
   else
-    h1 #{title}
-    form(action='/log-in' method='POST')
-      label(for="username") Username
-      input(name='username' placeholder='Username' type='text' required)
-      label(for='password') Password 
-      input(name='password', type='password' placeholder="Password" required)
-      button Log in
-  
-    hr
-    h1 Or sign up instead!
-  
+    section#form-container
+      article#form-wrapper
+        .title
+          span Login Form
+        form(action="/log-in" method="POST")
+          .row
+            i.fas.fa-user
+            input(name="username", type="text", placeholder="Username", required)
+          .row
+            i.fas.fa-lock
+            input(name="password", type="password", placeholder="Password", required)
+          .row.button
+            input(type="submit", value="Login")
+          .signup-link
+            | Not a member? 
+            a(href="/sign-up") Signup now
+
     a(href='/sign-up') Sign Up
 
   script.
