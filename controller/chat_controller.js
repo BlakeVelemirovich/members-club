@@ -52,7 +52,7 @@ exports.sign_up_post = [
     body('username')
     .trim()
     .notEmpty().withMessage('Username is required')
-    .isAscii().withMessage('Must use letters or numbers or special characters')
+    .isAscii().withMessage('Username must use letters or numbers or special characters')
     .customSanitizer((value) => {
         // forcing all letters to lowercase so unique usernames aren't case sensitive
         return value.toLowerCase();
@@ -62,19 +62,19 @@ exports.sign_up_post = [
     body('password')
     .trim()
     .notEmpty().withMessage('Password is required')
-    .isAscii().withMessage('Musst use letters or numbers or special characters')
+    .isAscii().withMessage('Password must only contain letters or numbers or special characters')
     .escape(),
 
     body('firstname')
     .trim()
-    .notEmpty().withMessage('Password is required')
-    .isAlpha().withMessage('Must use letters')
+    .notEmpty().withMessage('First name is required')
+    .isAlpha().withMessage('First name must be only letters')
     .escape(),
 
     body('lastname')
     .trim()
-    .notEmpty().withMessage('Password is required')
-    .isAlpha().withMessage('Must use letters')
+    .notEmpty().withMessage('Last name is required')
+    .isAlpha().withMessage('Last name must be only letters')
     .escape(),
 
     body('membership')

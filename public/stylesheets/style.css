@@ -93,3 +93,6 @@ article#new-message form div {
   width: 43rem;
 }
 
+.error {
+  border: 1px solid red;
+}
