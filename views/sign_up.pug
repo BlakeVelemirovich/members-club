@@ -2,28 +2,36 @@ extends layout
 
 block content 
 
-  h1 Sign Up 
-
-  if errors
-      ul
-        for error in errors
-          li(class="error")!= error.msg
-
-  form(action='/sign-up', method='POST')
-    label(for="username") Username
-    input(name='username', value=(undefined===username ? "" : username), type='text', placeholder="Username", required)
-    label(for='password') Password 
-    input(name='password', type='password' value="Password" required)
-    label(for='firstname') First Name 
-    input(name='firstname', type='text', value=(firstname===undefined ? "" : firstname), placeholder="First Name", required)
-    label(for='lastname') Last Name 
-    input(name='lastname', type='text', value=(undefined===lastname ? "" : lastname), placeholder="Last Name", required)
-    label(for='membership') Membership Status
-    select(name='membership')
-      option(value='yes') Yes 
-      option(value='no') No
-    label(for='admin') Admin Status
-    select(name='admin')
-      option(value='yes') Yes 
-      option(value='no') no
-    button Sign Up
+  section#form-container
+      article#form-wrapper
+        .title
+          span Signup Form
+        form(action="/sign-up" method="POST")
+          if errors
+            ul
+              for error in errors
+                li(class="error")!= error.msg
+          .row
+            i.user
+            input(name="username", value=(undefined===username ? "" : username), type="text", placeholder="Username", required)
+          .row
+            i.lock
+            input(name="password", type="password", placeholder="Password", required)
+          .row
+            i.user
+            input(name='firstname', type='text', value=(firstname===undefined ? "" : firstname), placeholder="First Name", required)
+          .row
+            i.user
+            input(name='lastname', type='text', value=(undefined===lastname ? "" : lastname), placeholder="Last Name", required)
+          select(name='membership')
+            option(value='yes') Yes 
+            option(value='no') No
+          label(for='admin') Admin Status
+          select(name='admin')
+            option(value='yes') Yes 
+            option(value='no') no
+          .row.button
+            input(type="submit", value="Login")
+          .signup-link
+            | Already a member? 
+            a(href="/") Login

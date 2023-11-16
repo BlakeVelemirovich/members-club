@@ -78,7 +78,7 @@ input {
 }
 
 button {
-  background-color: #0070c9;
+  background-color: var(--accent-colour);
   color: white;
   margin: 1rem;
   padding: 10px;
@@ -103,7 +103,7 @@ article#new-message form div {
   color: red;
 }
 
-/* Log-in Styles */
+/* Log-in and Sign up Styles */
 ::selection {
   background: var(--accent-colour);
 }
@@ -187,6 +187,7 @@ article#form-wrapper form .button input {
   background: var(--accent-colour);
   border: 1px solid var(--accent-colour);
   cursor: pointer;
+  padding: 0;
 }
 form .button input:hover {
   background: var(--accent-colour);
