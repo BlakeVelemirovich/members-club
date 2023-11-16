@@ -30,6 +30,8 @@ block content
         .title
           span Login Form
         form(action="/log-in" method="POST")
+          if error
+            p.error!= error
           .row
             i.fas.fa-user
             input(name="username", type="text", placeholder="Username", required)
@@ -40,9 +42,7 @@ block content
             input(type="submit", value="Login")
           .signup-link
             | Not a member? 
-            a(href="/sign-up") Signup now
-
-    a(href='/sign-up') Sign Up
+            a(href="/sign-up") Sign up now
 
   script.
     // JavaScript to scroll to the bottom of the container

@@ -15,10 +15,10 @@ passport.use(
         };
         bcrypt.compare(password, user.password, (err, res) => {
           if (res) {
-            // passwords match! log user in
+            // Passwords match! log user in
             return done(null, user)
           } else {
-            // passwords do not match!
+            // Passwords do not match!
             return done(null, false, { message: "Incorrect password" })
           }
         })
@@ -48,13 +48,13 @@ exports.sign_up_get = (req, res, next) => {
 };
 
 exports.sign_up_post = [
-    // sanitization and validation
+    // Sanitization and validation
     body('username')
     .trim()
     .notEmpty().withMessage('* Username is required')
     .isAscii().withMessage('* Username must use letters or numbers or special characters')
     .customSanitizer((value) => {
-        // forcing all letters to lowercase so unique usernames aren't case sensitive
+        // Forcing all letters to lowercase so unique usernames aren't case sensitive
         return value.toLowerCase();
     })
     .escape(),
@@ -114,15 +114,25 @@ exports.sign_up_post = [
         })
 ];
 
-exports.log_in = [
-    passport.authenticate('local', { failureRedirect: '/bs' }),
-    function (req, res, next) { 
-      res.render('index', { 
+exports.log_in = function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) {
+      // Authentication failed. Send an error message.
+      return res.render('index', {
+        error: 'Username or password is incorrect.'
+      })
+    }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      // Authentication succeeded. Log in the user and render our index template.
+      return res.render('index', { 
         user: req.user,
         title: 'Chat Board'
-      }); 
-    }
-]
+      });
+    });
+  })(req, res, next);
+};
 
 exports.post = [
     body('message')
