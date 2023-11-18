@@ -77,9 +77,6 @@ exports.sign_up_post = [
     .isAlpha().withMessage('* Last name must be only letters')
     .escape(),
 
-    body('membership')
-    .notEmpty().withMessage('* Membership status is required'),
-
     body('admin')
     .notEmpty().withMessage('* Admin status is required'),
 
@@ -103,13 +100,14 @@ exports.sign_up_post = [
                 last_name: req.body.lastname,
                 username: req.body.username,
                 password: hashedPassword,
-                membership: req.body.membership,
                 admin: req.body.admin
               });
               const result = await user.save();
               res.redirect("/");
             } catch(err) {
-              return next(err);
+              res.render('sign_up', {
+                duplicateUser: "*Username is already taken"
+              })
             };
         })
 ];

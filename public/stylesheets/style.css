@@ -23,6 +23,11 @@
   section#main article#new-message form div {
     width: fit-content;
   }
+
+  body section#form-container {
+    margin: auto;
+    padding: inherit;
+  }
 }
 
 body {

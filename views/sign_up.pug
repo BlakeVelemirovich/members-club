@@ -10,22 +10,21 @@ block content
           if errors
             ul
               for error in errors
-                li(class="error")!= error.msg
+                li.error!= error.msg
+          if duplicateUser
+            p.error #{duplicateUser}
           .row
             i.user
-            input(name="username", value=(undefined===username ? "" : username), type="text", placeholder="Username", required)
+            input(name="username", value=(undefined===username ? "" : username), type="text", placeholder="Username", maxLength="20", required)
           .row
             i.lock
-            input(name="password", type="password", placeholder="Password", required)
+            input(name="password", type="password", placeholder="Password", maxLength="100", required)
           .row
             i.user
-            input(name='firstname', type='text', value=(firstname===undefined ? "" : firstname), placeholder="First Name", required)
+            input(name='firstname', type='text', value=(firstname===undefined ? "" : firstname), placeholder="First Name", maxLength="20", required)
           .row
             i.user
-            input(name='lastname', type='text', value=(undefined===lastname ? "" : lastname), placeholder="Last Name", required)
-          select(name='membership')
-            option(value='yes') Yes 
-            option(value='no') No
+            input(name='lastname', type='text', value=(undefined===lastname ? "" : lastname), placeholder="Last Name", maxLength="20", required)
           label(for='admin') Admin Status
           select(name='admin')
             option(value='yes') Yes 
