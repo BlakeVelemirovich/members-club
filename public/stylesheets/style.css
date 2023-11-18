@@ -248,3 +248,7 @@ article#form-wrapper form .signup-link a {
 form .signup-link a:hover {
   text-decoration: underline;
 }
+
+form select {
+  margin-bottom: 1rem;
+}

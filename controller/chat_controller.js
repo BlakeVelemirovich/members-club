@@ -166,3 +166,17 @@ exports.post = [
 
 ];
 
+exports.delete = asyncHandler(async (req, res, next) => {
+  try {
+    const postId = req.params.postId;
+    const deletedPost = await Post.findByIdAndDelete(postId);
+
+    if (!deletedPost) {
+      return res.status(404).send('Post not found');
+    }
+
+    res.redirect('/');
+  } catch (err) {
+    next(err);
+  }
+});

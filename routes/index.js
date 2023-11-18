@@ -21,7 +21,8 @@ router.post('/sign-up', chat_controller.sign_up_post);
 // log-in route
 router.post('/log-in', chat_controller.log_in);
 
-// new message board post
+// message board routes
 router.post('/post', chat_controller.post); 
+router.get('/delete/:postId', chat_controller.delete);
 
 module.exports = router;

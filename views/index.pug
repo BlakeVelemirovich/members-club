@@ -15,7 +15,9 @@ block content
               li #{post.message}
                 .post-data 
                   p #{post.user[0].username} 
-                  p #{post.postedAt.toLocaleString(undefined, { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })} 
+                  p #{post.postedAt.toLocaleString(undefined, { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })}
+                  if (user && user.admin)
+                    a(href=`/delete/${post._id}`) Delete
       
       
       hr
