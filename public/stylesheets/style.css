@@ -2,8 +2,18 @@
   --accent-colour: #ebcfb2;
 }
 
+
+/* ********** Dynamic Sizing ********** */
+@media only screen
+and (min-width : 481px) 
+and (max-width : 767px) {
+    html {
+        font-size: 65%;
+    }
+}
+
 /* ********** Mobile Styles ********** */
-@media only screen and (max-device-width: 480px) {
+@media only screen and (max-width: 480px) {
   h1#title {
     display: none;
   }
@@ -35,7 +45,6 @@ body {
   margin: 20px;
   background-color: #f2f2f2; 
   height: 100vh;
-  overflow: hidden;
   background: linear-gradient(to right, #b38d97, #d5aca9);
 }
 
@@ -152,9 +161,10 @@ article#new-message form div {
   background: var(--accent-colour);
 }
 #form-container {
-  max-width: 440px;
-  padding: 0 20px;
-  margin: 170px auto;
+  max-width: calc(440rem / 16);
+  padding: 0 calc(20rem / 16);
+  margin-left: auto;
+  margin-right: auto;
 }
 article#form-wrapper {
   width: 100%;
@@ -167,7 +177,7 @@ article#form-wrapper .title {
   background: var(--accent-colour);
   border-radius: 5px 5px 0 0;
   color: #fff;
-  font-size: 30px;
+  font-size: calc(30rem / 16);
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -177,15 +187,15 @@ article#form-wrapper form {
   padding: 30px 25px 25px 25px;
 }
 article#form-wrapper form .row {
-  height: 45px;
-  margin-bottom: 15px;
+  height: calc(45em / 16);
+  margin-bottom: calc(15rem / 16);
   position: relative;
 }
 article#form-wrapper form .row input {
   height: 100%;
   width: 100%;
   outline: none;
-  padding-left: 60px;
+  padding-left: calc(60rem / 16);
   border-radius: 5px;
   border: 1px solid lightgrey;
   font-size: 16px;
@@ -200,10 +210,10 @@ form .row input::placeholder {
 }
 article#form-wrapper form .row i {
   position: absolute;
-  width: 47px;
+  width: calc(47rem / 16);
   height: 96%;
   color: #fff;
-  font-size: 18px;
+  font-size: calc(18rem / 16);
   background: var(--accent-colour);
   border: 1px solid var(--accent-colour);
   border-radius: 5px 0 0 5px;
@@ -225,7 +235,7 @@ article#form-wrapper form .row i.lock {
 
 article#form-wrapper form .button input {
   color: #fff;
-  font-size: 20px;
+  font-size: calc(20rem / 16);
   font-weight: 500;
   padding-left: 0px;
   background: var(--accent-colour);
@@ -238,8 +248,8 @@ form .button input:hover {
 }
 article#form-wrapper form .signup-link {
   text-align: center;
-  margin-top: 20px;
-  font-size: 17px;
+  margin-top: calc(20rem / 16);
+  font-size: calc(17rem / 16);
 }
 article#form-wrapper form .signup-link a {
   color: var(--accent-colour);
