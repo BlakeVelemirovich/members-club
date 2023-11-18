@@ -2,6 +2,29 @@
   --accent-colour: #ebcfb2;
 }
 
+/* ********** Mobile Styles ********** */
+@media only screen and (max-device-width: 480px) {
+  h1#title {
+    display: none;
+  }
+
+  header h1 {
+    font-size: 20px;
+  }
+
+  article#message-board{
+    height: 55vh;
+  }
+
+  article#new-message {
+    height: 30vh;
+  }
+
+  section#main article#new-message form div {
+    width: fit-content;
+  }
+}
+
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 20px;
@@ -9,6 +32,10 @@ body {
   height: 100vh;
   overflow: hidden;
   background: linear-gradient(to right, #b38d97, #d5aca9);
+}
+
+.error {
+  color: red;
 }
 
 /* ********** Header ********** */
@@ -50,12 +77,21 @@ article#message-board li {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
-article#new-message form {
+article li div.post-data {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  font-size: 70%;
+  color: gray;
+  text-transform: capitalize;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
 }
+
+article li div.post-data p {
+  margin-right: 1rem;
+  margin-bottom: 1px;
+  margin-top: 3px;
+}
+
 
 /* ********** New Post Submission ********** */
 
@@ -92,15 +128,18 @@ button:hover {
   background-color: #005393; 
 }
 
+article#new-message form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 article#new-message form div {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 43rem;
-}
-
-.error {
-  color: red;
 }
 
 /* Log-in and Sign up Styles */

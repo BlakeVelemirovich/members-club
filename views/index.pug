@@ -4,7 +4,7 @@ block content
    
   if (user)
     header
-      h1 #{title}
+      h1#title #{title}
       h1 Welcome, #{user.first_name}
 
     section#main
@@ -13,6 +13,9 @@ block content
           ul
             for post in posts 
               li #{post.message}
+                .post-data 
+                  p #{post.user[0].username} 
+                  p #{post.postedAt.toLocaleString(undefined, { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })} 
       
       
       hr

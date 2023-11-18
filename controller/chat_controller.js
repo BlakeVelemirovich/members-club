@@ -154,8 +154,8 @@ exports.post = [
           })
 
           await post.save();
-          const allPosts = await Post.find();
-          
+          const allPosts = await Post.find().populate('user');
+          console.log(allPosts)
           res.render('index', {
             user: req.user,
             title: 'Chat Board',
