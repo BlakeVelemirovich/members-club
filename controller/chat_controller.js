@@ -43,9 +43,28 @@ passport.use(
     };
   });
 
-exports.sign_up_get = (req, res, next) => {
-    res.render('sign_up');
-};
+  exports.sign_up_get = async (req, res, next) => {
+    try {
+      // Check if the user is not authenticated
+      if (!req.isAuthenticated()) {
+        // User is not logged in, go to sign up page
+        const allPosts = await Post.find().populate('user');
+        res.render('sign_up', {
+          posts: allPosts
+        });
+      } else {
+        // User is already logged in, go back to index
+        const allPosts = await Post.find().populate('user');
+        res.render('index', {
+          user: req.user,
+          title: 'Chat Board',
+          posts: allPosts
+        });
+      }
+    } catch (err) {
+      next(err);
+    }
+  };
 
 exports.sign_up_post = [
     // Sanitization and validation
@@ -112,7 +131,7 @@ exports.sign_up_post = [
         })
 ];
 
-exports.log_in = function(req, res, next) {
+exports.log_in = async function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
     if (!user) {
