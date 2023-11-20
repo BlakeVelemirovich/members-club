@@ -4,8 +4,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const MongoStore = require('connect-mongo')(session);
 const session = require("express-session");
+const MongoStore = require('connect-mongo')(session);
 const passport = require("passport");
 
 var indexRouter = require('./routes/index');
