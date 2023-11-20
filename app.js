@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const MongoStore = require('connect-mongo')(session);
 const session = require("express-session");
 const passport = require("passport");
 
@@ -14,7 +15,7 @@ var app = express();
 
 // passport setup
 const passportKey = process.env.PASSPORTKEY
-app.use(session({ secret: passportKey, resave: false, saveUninitialized: true }));
+app.use(session({ secret: passportKey, resave: false, saveUninitialized: true, store: new MongoStore({ mongooseConnection: mongoose.connection }) }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
