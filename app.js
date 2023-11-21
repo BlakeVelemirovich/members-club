@@ -5,13 +5,19 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require("express-session");
-const MongoStore = require('connect-mongo')(session);
 const passport = require("passport");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+// passport setup
+const passportKey = process.env.PASSPORTKEY
+app.use(session({ secret: passportKey, resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.urlencoded({ extended: false }));
 
 // database connection setup
 const mongoose = require("mongoose");
@@ -22,13 +28,6 @@ main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
 }
-
-// passport setup
-const passportKey = process.env.PASSPORTKEY
-app.use(session({ secret: passportKey, resave: false, saveUninitialized: true, store: new MongoStore({ mongooseConnection: mongoose.connection }) }));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(express.urlencoded({ extended: false }));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
