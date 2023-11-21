@@ -140,12 +140,14 @@ exports.log_in = async function(req, res, next) {
         error: 'Username or password is incorrect.'
       })
     }
-    req.logIn(user, function(err) {
+    req.logIn(user, async function(err) {
       if (err) { return next(err); }
       // Authentication succeeded. Log in the user and render our index template.
+      const allPosts = await Post.find().populate('user');
       return res.render('index', { 
         user: req.user,
-        title: 'Chat Board'
+        title: 'Chat Board',
+        posts: allPosts
       });
     });
   })(req, res, next);
